@@ -1,0 +1,127 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { Award, Users, Calendar } from 'lucide-react'
+
+const achievements = [
+  { icon: Award, title: 'Best Hostel Award', year: '2023' },
+  { icon: Users, title: '500+ Residents', year: 'Active' },
+  { icon: Calendar, title: 'Established', year: '1985' },
+]
+
+const imagePlaceholders = [
+  { id: 1, alt: 'Hostel Building' },
+  { id: 2, alt: 'Common Area' },
+  { id: 3, alt: 'Dining Hall' },
+  { id: 4, alt: 'Recreation Room' },
+]
+
+export default function About() {
+  return (
+    <section id="about" className="py-20 bg-white dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="font-serif font-bold text-4xl md:text-5xl text-gray-900 dark:text-white mb-4">
+            About Us
+          </h2>
+          <div className="w-24 h-1 bg-primary mx-auto" />
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Text Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            <div>
+              <h3 className="font-serif font-bold text-3xl text-gray-900 dark:text-white mb-4">
+                Our History
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                Established in 1985, our hostel has been a home to thousands of students,
+                providing not just accommodation but a nurturing environment for personal
+                and academic growth. Over the years, we have built a strong community
+                that values respect, responsibility, and excellence.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-serif font-bold text-3xl text-gray-900 dark:text-white mb-4">
+                Our Culture
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                We believe in fostering a culture of inclusivity, where every resident
+                feels valued and supported. Our community celebrates diversity and
+                encourages students to participate in various cultural, sports, and
+                academic activities that help them grow beyond the classroom.
+              </p>
+            </div>
+
+            {/* Achievements */}
+            <div className="grid grid-cols-3 gap-4 pt-6">
+              {achievements.map((achievement, index) => {
+                const Icon = achievement.icon
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                  >
+                    <Icon className="w-8 h-8 text-primary mx-auto mb-2" />
+                    <p className="font-semibold text-sm text-gray-900 dark:text-white">
+                      {achievement.title}
+                    </p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      {achievement.year}
+                    </p>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </motion.div>
+
+          {/* Image Grid */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-2 gap-4"
+          >
+            {imagePlaceholders.map((image, index) => (
+              <motion.div
+                key={image.id}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="relative aspect-square rounded-lg overflow-hidden bg-gradient-to-br from-primary to-primary-dark shadow-lg"
+              >
+                <div className="absolute inset-0 flex items-center justify-center text-white/20 text-2xl font-serif">
+                  {image.alt}
+                </div>
+                <div className="absolute inset-0 bg-black/10 hover:bg-black/20 transition-colors" />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
