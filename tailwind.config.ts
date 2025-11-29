@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#feb901' , // Royal Blue - can be swapped easily
+          DEFAULT: '#feb901' , 
           dark: '#1e3a8a',
           light: '#3b82f6',
         },
