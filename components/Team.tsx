@@ -94,41 +94,103 @@ const departmentSecys = {
 
 // --- Components ---
 
-const MemberCard = ({ member, isLeader = false, onOpenSecys }) => {
+interface MousePosition {
+  x: number;
+  y: number;
+}
+
+interface Member {
+  id?: string;
+  name: string;
+  role: string;
+  email: string;
+  phone?: string;
+  description?: string;
+  image: any;
+}
+
+const MemberCard = ({ member, isLeader = false, onOpenSecys }: { member: Member; isLeader?: boolean; onOpenSecys: (member: Member) => void }) => {
+  const [mousePosition, setMousePosition] = React.useState<MousePosition>({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = React.useState(false);
+  const [glowPosition, setGlowPosition] = React.useState<MousePosition>({ x: 0, y: 0 });
+  const cardRef = React.useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Normalize coordinates to center (0, 0)
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const normalizedX = (x - centerX) / centerX;
+    const normalizedY = (y - centerY) / centerY;
+
+    setMousePosition({ x: normalizedX, y: normalizedY });
+    setGlowPosition({ x, y });
+  };
+
+  const handleMouseEnter = () => setIsHovering(true);
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setMousePosition({ x: 0, y: 0 });
+  };
+
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ y: -8 }}
-      className={`relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden flex flex-col ${
-        isLeader ? 'max-w-md w-full border-t-4 border-amber-500' : 'max-w-sm w-full'
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        perspective: '1000px',
+        transformStyle: 'preserve-3d',
+      }}
+      animate={
+        isHovering
+          ? {
+              rotateX: mousePosition.y * 8,
+              rotateY: mousePosition.x * -8,
+            }
+          : {
+              rotateX: 0,
+              rotateY: 0,
+            }
+      }
+      transition={{ type: 'spring', stiffness: 200, damping: 30 }}
+      className={`relative overflow-hidden flex flex-col ${
+        isLeader ? 'max-w-md w-full' : 'max-w-sm w-full'
       }`}
     >
-      {/* Image Header */}
-      <div className={`relative w-full ${isLeader ? 'h-80' : 'h-72'} bg-gray-50 dark:bg-gray-700/50`}>
-        <Image
-          src={member.image}
-          alt={member.name}
-          fill
-          className="object-contain p-2 transition-transform duration-500 hover:scale-105"
-          placeholder="blur" 
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN88OjpfwAIuQOsC8XrzwAAAABJRU5ErkJggg=="
+      {/* Glassmorphism Background */}
+      <div
+        className={`absolute inset-0 bg-white/40 dark:bg-gray-800/40 backdrop-blur-lg rounded-2xl border border-white/30 dark:border-white/10 shadow-xl ${
+          isLeader ? 'border-t-4 border-t-amber-500' : ''
+        }`}
+        style={{ zIndex: 1 }}
+      />
+
+      {/* Glow Effect */}
+      {isHovering && (
+        <motion.div
+          className="absolute inset-0 rounded-2xl pointer-events-none"
+          style={{
+            background: `radial-gradient(600px at ${glowPosition.x}px ${glowPosition.y}px, rgba(251, 146, 60, 0.15), transparent 80%)`,
+            zIndex: 2,
+          }}
+          animate={{
+            opacity: isHovering ? 1 : 0,
+          }}
+          transition={{ duration: 0.2 }}
         />
-      </div>
+      )}
 
-      {/* Content */}
-      <div className="p-6 flex-grow flex flex-col items-center text-center">
-        <h3 className={`font-serif font-bold text-gray-900 dark:text-white mb-2 ${isLeader ? 'text-2xl' : 'text-xl'}`}>
-          {member.name}
-        </h3>
-        
-        {/* Highlighted Role Badge */}
-        <div className={`mb-4 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 border border-amber-200 dark:border-amber-800`}>
-            {member.role}
-        </div>
-
+<<<<<<< HEAD
         {/* Contact Links - Full width with text */}
         <div className="w-full space-y-3 mb-6">
           <a 
@@ -138,25 +200,106 @@ const MemberCard = ({ member, isLeader = false, onOpenSecys }) => {
             <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
             <span>{member.phone}</span>
           </a>
+=======
+      {/* Content Wrapper */}
+      <div className="relative z-10 flex flex-col h-full">
+        {/* Image Header */}
+        <div className={`relative w-full ${isLeader ? 'h-80' : 'h-72'} bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 overflow-hidden`}>
+          <motion.div
+            animate={
+              isHovering
+                ? { scale: 1.08 }
+                : { scale: 1 }
+            }
+            transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+            className="w-full h-full"
+          >
+            <Image
+              src={member.image}
+              alt={member.name}
+              fill
+              className="object-contain p-2 transition-all duration-500"
+              placeholder="blur" 
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN88OjpfwAIuQOsC8XrzwAAAABJRU5ErkJggg=="
+            />
+          </motion.div>
+>>>>>>> 8f8505e0352898100ebcf84663af5c9ef12b69f5
         </div>
 
-        {/* Button (Only for Cos/Nominees who have secys) */}
-        {departmentSecys[member.id] && (
-          <button
-            onClick={() => onOpenSecys(member)}
-            className="mt-auto w-full group flex items-center justify-center gap-2 text-sm font-bold text-primary hover:text-white px-4 py-3 rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary transition-all"
+        {/* Content */}
+        <div className="p-6 flex-grow flex flex-col items-center text-center">
+          <h3 className={`font-serif font-bold text-gray-900 dark:text-white mb-2 ${isLeader ? 'text-2xl' : 'text-xl'}`}>
+            {member.name}
+          </h3>
+          
+          {/* Highlighted Role Badge */}
+          <motion.div
+            animate={isHovering ? { scale: 1.05 } : { scale: 1 }}
+            className={`mb-4 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 border border-amber-200 dark:border-amber-800`}
           >
+<<<<<<< HEAD
             View {member.role.split(' ')[0]} Secys
             <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
         )}
+=======
+              {member.role}
+          </motion.div>
+
+          {/* Contact Links - Full width with text */}
+          <div className="w-full space-y-3 mb-6">
+            {/* <a 
+              href={`mailto:${member.email}`} 
+              className="flex items-center justify-center gap-3 w-full py-2 px-4 rounded-lg bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 hover:bg-primary hover:text-white transition-all duration-300 text-sm font-medium group"
+            >
+              <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span className="truncate">{member.email}</span>
+            </a> */}
+            <motion.a 
+              href={`tel:${member.phone}`}
+              whileHover={{ scale: 1.02 }}
+              className="flex items-center justify-center gap-3 w-full py-2 px-4 rounded-lg bg-gray-100/60 dark:bg-gray-700/30 text-gray-700 dark:text-gray-200 hover:bg-primary hover:text-white transition-all duration-300 text-sm font-medium group backdrop-blur-sm border border-white/20"
+            >
+              <motion.div
+                animate={isHovering ? { scale: 1.15, rotate: 15 } : { scale: 1, rotate: 0 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
+                <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              </motion.div>
+              <span>{member.phone}</span>
+            </motion.a>
+          </div>
+
+          {/* Button (Only for Cos/Nominees who have secys) */}
+          {member.id && departmentSecys[member.id as keyof typeof departmentSecys] && (
+            <motion.button
+              onClick={() => onOpenSecys(member)}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="mt-auto w-full group flex items-center justify-center gap-2 text-sm font-bold text-primary hover:text-white px-4 py-3 rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary transition-all backdrop-blur-sm"
+            >
+              View {member.role.split(' ')[0]} Team
+              <motion.div
+                animate={isHovering ? { x: 4 } : { x: 0 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
+                <ChevronRight className="w-4 h-4" />
+              </motion.div>
+            </motion.button>
+          )}
+        </div>
+>>>>>>> 8f8505e0352898100ebcf84663af5c9ef12b69f5
       </div>
       
     </motion.div>
   );
 };
 
-const SecretaryModal = ({ isOpen, onClose, data, departmentName }) => {
+interface Secretary extends Member {
+  role: string;
+}
+
+const SecretaryModal = ({ isOpen, onClose, data, departmentName }: { isOpen: boolean; onClose: () => void; data: Secretary[] | null; departmentName?: string }) => {
   if (!isOpen || !data) return null;
 
   return (
@@ -194,7 +337,7 @@ const SecretaryModal = ({ isOpen, onClose, data, departmentName }) => {
           {/* Modal Content (Scrollable) */}
           <div className="p-8 overflow-y-auto bg-gray-50/50 dark:bg-black/20">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {data.map((secy, idx) => (
+              {data.map((secy: Secretary, idx: number) => (
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -236,9 +379,9 @@ const SecretaryModal = ({ isOpen, onClose, data, departmentName }) => {
 
 export default function Team() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedDept, setSelectedDept] = useState(null);
+  const [selectedDept, setSelectedDept] = useState<Member | null>(null);
 
-  const handleOpenSecys = (member) => {
+  const handleOpenSecys = (member: Member) => {
     setSelectedDept(member);
     setModalOpen(true);
   };
@@ -292,7 +435,7 @@ export default function Team() {
       <SecretaryModal
         isOpen={modalOpen}
         onClose={closeSecys}
-        data={selectedDept ? departmentSecys[selectedDept.id] : []}
+        data={selectedDept && selectedDept.id ? departmentSecys[selectedDept.id as keyof typeof departmentSecys] : null}
         departmentName={selectedDept ? selectedDept.role : ''}
       />
       
