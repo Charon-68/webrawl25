@@ -14,8 +14,6 @@ import gallery6 from './assets/gallery/gallery6.jpg';
 import gallery7 from './assets/gallery/gallery7.jpg';
 
 
-// Replace these placeholders with your actual images from your assets folder
-// e.g., import image1 from '@/assets/image1.jpg' or use string paths like '/images/hostel.jpg'
 const galleryImages = [
   { 
     id: 1, 
@@ -116,9 +114,6 @@ export default function Gallery() {
             Gallery
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-4" />
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Take a virtual tour of our facilities and spaces
-          </p>
         </motion.div>
 
         {/* Carousel Container */}

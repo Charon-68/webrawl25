@@ -53,7 +53,7 @@ export default function Navbar() {
               <Building2 className="w-6 h-6 text-white" />
             </div>
             <span className="font-serif font-bold text-xl text-gray-900 dark:text-white">
-              Hostel
+              Hostel 2
             </span>
           </motion.div>
 
