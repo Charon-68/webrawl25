@@ -196,103 +196,50 @@ export default function Contact() {
           </motion.div>
 
           {/* Grievance Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg"
-          >
-            <h3 className="font-serif font-bold text-2xl text-gray-900 dark:text-white mb-6">
-              Submit a Grievance
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
-              Have a concern or issue? Fill out the form below and we'll address it promptly.
-            </p>
-            <form onSubmit={handleGrievanceSubmit} className="space-y-6" noValidate>
-              {/* Name Field */}
-              <div>
-                <label 
-                  htmlFor="grievance-name" 
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="grievance-name"
-                  name="name"
-                  value={grievanceFormData.name}
-                  onChange={handleGrievanceChange}
-                  required
-                  minLength={2}
-                  maxLength={100}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                  placeholder="Enter your full name"
-                />
-              </div>
 
-              {/* Room Number Field */}
-              <div>
-                <label 
-                  htmlFor="grievance-roomNumber" 
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Room Number <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="grievance-roomNumber"
-                  name="roomNumber"
-                  value={grievanceFormData.roomNumber}
-                  onChange={handleGrievanceChange}
-                  required
-                  pattern="^[A-Za-z0-9\s\-/]+$"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                  placeholder="e.g., 101, A-205, Block-B/301"
-                />
-                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                  Enter your room number or block/room combination
-                </p>
-              </div>
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Section Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="font-serif font-bold text-4xl md:text-5xl text-gray-900 dark:text-white mb-4">
+                Submit a Grievance
+              </h2>
+              <div className="w-24 h-1 bg-primary mx-auto mb-4" />
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Please fill out the form below to register your complaint.
+              </p>
+            </motion.div>
 
-              {/* Issue Description Field */}
-              <div>
-                <label 
-                  htmlFor="grievance-issueDescription" 
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            {/* Google Form Window */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              // "Small window" look: constrained width, rounded corners, shadow
+              className="mx-auto max-w-xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
+            >
+              {/* Iframe Container */}
+              <div className="w-full h-[700px]">
+                <iframe
+                  src="https://forms.gle/SkcZN8jQ6dR83ADNA"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  marginHeight={0}
+                  marginWidth={0}
+                  title="Grievance Form"
                 >
-                  Issue Description <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  id="grievance-issueDescription"
-                  name="issueDescription"
-                  value={grievanceFormData.issueDescription}
-                  onChange={handleGrievanceChange}
-                  required
-                  minLength={10}
-                  maxLength={1000}
-                  rows={6}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
-                  placeholder="Please describe your issue or concern in detail..."
-                />
-                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                  Minimum 10 characters, maximum 1000 characters
-                </p>
+                  Loading form...
+                </iframe>
               </div>
-
-              {/* Submit Button */}
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full px-6 py-3 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-dark transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Send className="w-5 h-5" />
-                <span>Submit Grievance</span>
-              </motion.button>
-            </form>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

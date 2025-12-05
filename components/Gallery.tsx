@@ -14,8 +14,6 @@ import gallery6 from './assets/gallery/gallery6.jpg';
 import gallery7 from './assets/gallery/gallery7.jpg';
 
 
-// Replace these placeholders with your actual images from your assets folder
-// e.g., import image1 from '@/assets/image1.jpg' or use string paths like '/images/hostel.jpg'
 const galleryImages = [
   { 
     id: 1, 

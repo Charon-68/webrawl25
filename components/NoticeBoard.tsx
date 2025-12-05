@@ -49,7 +49,7 @@ export default function NoticeBoard() {
   const currentAnnouncement = announcements[currentIndex]
 
   return (
-    <section className="py-20 bg-yellow-100 dark:bg-yellow-600">
+    <section className="py-20 bg-yellow-100/70 dark:bg-yellow-600/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

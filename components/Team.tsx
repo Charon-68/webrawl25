@@ -7,10 +7,12 @@ import { Mail, Phone, X, ChevronRight } from 'lucide-react'
 
 // --- Asset Imports ---
 import adarsh from './assets/councilPhotos/adarsh.jpg';
+import sahoo from './assets/councilPhotos/sahoo.jpg'
 import ankit from './assets/councilPhotos/ankit.jpg';
 import asmit from './assets/councilPhotos/asmit.jpg';
 import avichal from './assets/councilPhotos/avichal.jpg';
 import dhruvaraj from './assets/councilPhotos/dhruvaraj.jpg';
+import vijay from './assets/councilPhotos/vijay.jpg';
 import dilip from './assets/councilPhotos/dilip.jpg';
 import garvit from './assets/councilPhotos/garvit.jpg';
 import koushtubhya from './assets/councilPhotos/Koushtubhya.png';
@@ -56,7 +58,7 @@ const departmentSecys = {
   sports: [
     { name: 'Saumya Yadav', role: 'Sports Secy', image: saumya, email: 'ankit@sports.hostel' },
     { name: 'Prince', role: 'Sports Secy', image: prince, email: 'asmit@sports.hostel' },
-    { name: 'Kumar Vijay', role: 'Sports Secy', image: piyush, email: 'piyush@sports.hostel' },
+    { name: 'Kumar Vijay', role: 'Sports Secy', image: vijay, email: 'piyush@sports.hostel' },
     { name: 'Prithvi Bhardwaj', role: 'Sports Secy', image: prithvi, email: 'piyush@sports.hostel' },
     { name: 'Dilip Karwasra', role: 'Sports Secy', image: dilip, email: 'piyush@sports.hostel' },
     { name: 'Lokesh', role: 'Sports Secy', image: lokesh, email: 'piyush@sports.hostel' },
@@ -67,7 +69,7 @@ const departmentSecys = {
     { name: 'Anmol Gill', role: 'Cult Secy', image: prithvi, email: 'prithvi@cult.hostel' },
   ],
   tech: [
-    { name: 'Soham sahoo', role: 'Tech Secy', image: saumya, email: 'saumya@tech.hostel' },
+    { name: 'Soham sahoo', role: 'Tech Secy', image: sahoo, email: 'saumya@tech.hostel' },
     { name: 'Garvit meena', role: 'Tech Secy', image: garvit, email: 'shlok@tech.hostel' },
   ],
   maint: [
@@ -83,6 +85,9 @@ const departmentSecys = {
   ],
   events: [
     { name: 'Neel Patil', role: 'Events Secy', image: neel, email: 'neel@events.hostel' },
+  ],
+  alumni: [
+    { name: 'Avichal Rajput', role: 'Alumni Secy', image: avichal, email: 'neel@events.hostel' },
   ],
 }
 
@@ -125,13 +130,6 @@ const MemberCard = ({ member, isLeader = false, onOpenSecys }) => {
 
         {/* Contact Links - Full width with text */}
         <div className="w-full space-y-3 mb-6">
-          {/* <a 
-            href={`mailto:${member.email}`} 
-            className="flex items-center justify-center gap-3 w-full py-2 px-4 rounded-lg bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 hover:bg-primary hover:text-white transition-all duration-300 text-sm font-medium group"
-          >
-            <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            <span className="truncate">{member.email}</span>
-          </a> */}
           <a 
             href={`tel:${member.phone}`} 
             className="flex items-center justify-center gap-3 w-full py-2 px-4 rounded-lg bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 hover:bg-primary hover:text-white transition-all duration-300 text-sm font-medium group"
@@ -147,11 +145,12 @@ const MemberCard = ({ member, isLeader = false, onOpenSecys }) => {
             onClick={() => onOpenSecys(member)}
             className="mt-auto w-full group flex items-center justify-center gap-2 text-sm font-bold text-primary hover:text-white px-4 py-3 rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary transition-all"
           >
-            View {member.role.split(' ')[0]} Team
+            View {member.role.split(' ')[0]} Secys
             <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
         )}
       </div>
+      
     </motion.div>
   );
 };
@@ -221,13 +220,6 @@ const SecretaryModal = ({ isOpen, onClose, data, departmentName }) => {
                             {secy.role}
                         </span>
                     </div>
-{/*                     
-                    <div className="pt-4 space-y-2 w-full">
-                       <a href={`mailto:${secy.email}`} className="flex items-center justify-center gap-2 p-2 rounded-lg bg-gray-50 dark:bg-gray-700/30 text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-primary/5 transition-colors text-sm">
-                          <Mail className="w-4 h-4" />
-                          <span className="truncate">{secy.email}</span>
-                       </a>
-                    </div> */}
                   </div>
                 </motion.div>
               ))}
@@ -288,7 +280,7 @@ export default function Team() {
         </div>
 
         {/* --- Layout: Level 3 (Second 3 Cos) --- */}
-        <div className="flex flex-wrap justify-center gap-8">
+        <div className="flex flex-wrap ustify-center gap-8">
           {rowTwoCos.map((member) => (
             <MemberCard key={member.id} member={member} onOpenSecys={handleOpenSecys} />
           ))}
@@ -302,6 +294,17 @@ export default function Team() {
         data={selectedDept ? departmentSecys[selectedDept.id] : []}
         departmentName={selectedDept ? selectedDept.role : ''}
       />
+      
+      {/* Centered Button Container */}
+      <div className="w-full flex justify-center mt-16 pb-10">
+        <button
+          onClick={() => handleOpenSecys({ id: 'alumni', role: 'Alumni Secretary' })}
+          className="group flex items-center justify-center gap-2 text-xl font-bold text-white px-8 py-4 rounded-xl bg-gray-900 hover:bg-gray-800 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
+        >
+          Other Secys
+          <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+        </button>
+      </div>
     </section>
   )
 }
