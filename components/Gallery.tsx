@@ -79,31 +79,22 @@ const variants = {
 }
 
 export default function Gallery() {
-  const [[page, direction], setPage] = useState([0, 0])
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [selected, setSelected] = useState<number | null>(null)
 
-  // We wrap the index to ensure it stays valid within the array length
-  const imageIndex = Math.abs(page % galleryImages.length)
+  // open image in lightbox
+  const openImage = (id: number) => setSelected(id)
+  const closeImage = () => setSelected(null)
 
-  const paginate = useCallback((newDirection: number) => {
-    setPage([page + newDirection, newDirection])
-  }, [page])
-
-  // Auto-play logic
-  useEffect(() => {
-    if (!isAutoPlaying) return
-
-    const timer = setInterval(() => {
-      paginate(1)
-    }, 5000) // Change slide every 5 seconds
-
-    return () => clearInterval(timer)
-  }, [isAutoPlaying, paginate])
+  // drag dismiss handler
+  const handleDragEnd = (_: any, info: { offset: { x: number; y: number }; velocity: { x: number; y: number } }) => {
+    const shouldClose = Math.abs(info.offset.y) > 150 || Math.abs(info.velocity.y) > 800
+    if (shouldClose) closeImage()
+  }
 
   return (
     <section id="gallery" className="py-20 bg-yellow-100 dark:bg-yellow-600 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -121,74 +112,84 @@ export default function Gallery() {
           </p>
         </motion.div>
 
-        {/* Carousel Container */}
-        <div 
-          className="relative w-full max-w-5xl mx-auto h-[400px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl bg-gray-200 dark:bg-gray-800"
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
-        >
-          <AnimatePresence initial={false} custom={direction}>
-            <motion.div
-              key={page}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.2 }
-              }}
-              className="absolute inset-0 w-full h-full"
-            >
-              {/* Image */}
-              <Image
-                src={galleryImages[imageIndex].src}
-                alt={galleryImages[imageIndex].title}
-                className="w-full h-full object-cover"
-              />
-              
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation Buttons */}
-          <div className="absolute inset-0 flex items-center justify-between p-4 z-10 pointer-events-none">
-            <button
-              onClick={() => paginate(-1)}
-              className="pointer-events-auto p-3 rounded-full bg-white/10 hover:bg-white/30 backdrop-blur-md text-white transition-all transform hover:scale-110 border border-white/20"
-              aria-label="Previous image"
-            >
-              <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
-            </button>
-            <button
-              onClick={() => paginate(1)}
-              className="pointer-events-auto p-3 rounded-full bg-white/10 hover:bg-white/30 backdrop-blur-md text-white transition-all transform hover:scale-110 border border-white/20"
-              aria-label="Next image"
-            >
-              <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
-            </button>
-          </div>
-
-          {/* Progress Indicators */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
-            {galleryImages.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => {
-                    const direction = idx > imageIndex ? 1 : -1
-                    setPage([page + (idx - imageIndex), direction])
-                }}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  idx === imageIndex 
-                    ? 'bg-white w-6' 
-                    : 'bg-white/50 hover:bg-white/80'
-                }`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
+        {/* Masonry Gallery */}
+        <div className="mx-auto max-w-7xl">
+          <div className="columns-2 md:columns-3 gap-4 [&>div]:mb-4">
+            {galleryImages.map((img) => (
+              <div key={img.id} className="break-inside-avoid rounded-lg overflow-hidden">
+                <motion.div
+                  layoutId={`gallery-${img.id}`}
+                  whileHover={{ scale: 1.03 }}
+                  className="cursor-pointer rounded-lg overflow-hidden relative"
+                  onClick={() => openImage(img.id)}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.title}
+                    placeholder="blur"
+                    className="w-full h-auto object-cover rounded-lg transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </motion.div>
+              </div>
             ))}
           </div>
-
         </div>
+
+        {/* Lightbox Modal */}
+        <AnimatePresence>
+          {selected !== null && (
+            <motion.div
+              key="backdrop"
+              className="fixed inset-0 z-50 flex items-center justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {/* backdrop */}
+              <motion.div
+                className="absolute inset-0 bg-black/70"
+                onClick={closeImage}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              />
+
+              {/* Image panel */}
+              <motion.div
+                layoutId={`gallery-${selected}`}
+                className="relative z-10 max-w-5xl w-full mx-4 md:mx-0 rounded-xl overflow-hidden"
+                drag="y"
+                dragConstraints={{ top: 0, bottom: 0 }}
+                onDragEnd={handleDragEnd}
+                initial={{ y: 50, opacity: 0, scale: 0.98 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                exit={{ y: 50, opacity: 0, scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              >
+                <div className="bg-gray-900/5 dark:bg-black/40 p-4 md:p-6">
+                  <Image
+                    src={galleryImages.find(g => g.id === selected)!.src}
+                    alt={galleryImages.find(g => g.id === selected)!.title}
+                    placeholder="blur"
+                    className="w-full h-[70vh] md:h-[80vh] object-contain rounded-md"
+                    sizes="100vw"
+                  />
+
+                  {/* Close button */}
+                  <button
+                    onClick={closeImage}
+                    aria-label="Close image"
+                    className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-md"
+                  >
+                    ×
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </div>
     </section>
   )
