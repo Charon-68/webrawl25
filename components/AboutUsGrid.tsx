@@ -40,7 +40,7 @@ export default function AboutUsGrid() {
             <div className="relative p-6 lg:p-8 grid md:grid-cols-2 gap-4 items-center h-full">
               <div className="space-y-3">
                 <p className="text-sm uppercase tracking-[0.25em] text-primary-dark/80 dark:text-primary/80 font-semibold">
-                  Established 1985
+                  Established 1960
                 </p>
                 <h3 className="font-serif text-3xl md:text-4xl text-gray-900 dark:text-white leading-snug">
                   A legacy hostel where ambition meets belonging.
@@ -52,8 +52,8 @@ export default function AboutUsGrid() {
               <div className="grid grid-cols-3 gap-3 text-center">
                 {[
                   { icon: Users, title: '500+', subtitle: 'Residents' },
-                  { icon: Award, title: 'GC 2024', subtitle: 'Winners' },
-                  { icon: Calendar, title: '39 yrs', subtitle: 'Heritage' },
+                  { icon: Award, title: 'Overall GC 2024', subtitle: 'Winners' },
+                  { icon: Calendar, title: '65 yrs', subtitle: 'Heritage' },
                 ].map(({ icon: Icon, title, subtitle }) => (
                   <div
                     key={title}
