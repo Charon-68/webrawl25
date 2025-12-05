@@ -1,12 +1,11 @@
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import NoticeBoard from '@/components/NoticeBoard'
-import About from '@/components/About'
+import AboutUsGrid from '@/components/AboutUsGrid'
 import Facilities from '@/components/Facilities'
 import Team from '@/components/Team'
 import Gallery from '@/components/Gallery'
 import Contact from '@/components/Contact'
-import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
@@ -14,11 +13,11 @@ export default function Home() {
       <Navbar />
       <Hero />
       <NoticeBoard />
-      <About />
+      <AboutUsGrid />
       <Facilities />
       <Team />
       <Gallery />
-      <Footer />
+      <Contact />
     </main>
   )
 }
