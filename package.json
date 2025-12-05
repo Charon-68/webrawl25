@@ -9,17 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^14.2.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.4.2",
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.344.0",
-    "next-themes": "^0.2.1"
+    "next": "^14.2.0",
+    "next-themes": "^0.2.1",
+    "react": "^18.3.1",
+    "react-confetti": "^6.4.0",
+    "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.6.0",
+    "three": "^0.181.2"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.181.0",
     "autoprefixer": "^10.4.17",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.2.0",
@@ -28,4 +34,3 @@
     "typescript": "^5.3.3"
   }
 }
-

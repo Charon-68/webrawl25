@@ -1,141 +1,69 @@
-# Hostel Website - Web Brawl General Championship
+# Hostel Website (Web Brawl GC)
 
-A modern, high-performance hostel website built with Next.js 14+, featuring stunning animations, dark mode, and a fully responsive design.
+Modern single-page hostel site built with Next.js 14 App Router, Tailwind CSS, and motion/3D flourishes. Includes theme toggling, animated sections, and responsive layouts tailored for hostel showcase content.
 
-## 🚀 Features
+## Features
 
-- **Next.js 14+ App Router** - Modern React framework with server-side rendering
-- **Tailwind CSS** - Utility-first CSS framework for rapid UI development
-- **Framer Motion** - Smooth animations and transitions throughout
-- **Dark/Light Mode** - Theme toggle with persistent preference
-- **Fully Responsive** - Mobile-first design that works on all devices
-- **Interactive Components**:
-  - Sticky Navbar with smooth scroll navigation
-  - Hero section with parallax effect
-  - Notice Board with auto-rotating announcements
-  - Facilities grid with hover effects
-  - Gallery with masonry layout and lightbox
-  - Contact form with validation
+- App Router with shared layout, metadata, and global fonts/theme providers
+- Responsive sticky navbar with smooth-scrolling anchors
+- Animated hero with 3D/Three.js hook-up and CTA buttons
+- Notice board carousel for announcements
+- Section blocks: About, Facilities grid, Team highlights, Gallery, Contact
+- Dark/light mode via `next-themes` and persisted preference
+- Toast support and Framer Motion animation patterns
 
-## 📦 Tech Stack
+## Tech Stack
 
-- **Framework:** Next.js 14+ (App Router)
-- **Styling:** Tailwind CSS
-- **Icons:** Lucide React
-- **Animations:** Framer Motion
-- **Theme:** next-themes
+- Next.js 14 (App Router) + TypeScript
+- Tailwind CSS for styling; custom theme colors/fonts in `tailwind.config.ts`
+- Framer Motion for animations
+- Three.js via `@react-three/fiber` and `@react-three/drei` (hero visual)
+- Lucide React icons; react-hot-toast; next-themes
 
-## 🛠️ Installation
-
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-2. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
-
-3. **Open your browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 📁 Project Structure
+## Project Structure
 
 ```
-├── app/
-│   ├── layout.tsx          # Root layout with theme provider
-│   ├── page.tsx             # Home page
-│   └── globals.css          # Global styles and Tailwind imports
-├── components/
-│   ├── Navbar.tsx           # Navigation bar with theme toggle
-│   ├── Hero.tsx             # Hero section with parallax
-│   ├── NoticeBoard.tsx      # Interactive notice board
-│   ├── About.tsx            # About us section
-│   ├── Facilities.tsx       # Facilities grid
-│   ├── Team.tsx             # Team member cards
-│   ├── Gallery.tsx          # Image gallery with lightbox
-│   ├── Contact.tsx          # Contact form and map
-│   ├── Footer.tsx           # Footer component
-│   └── ThemeProvider.tsx    # Theme context provider
-└── public/                  # Static assets
+app/
+  layout.tsx        # Root layout, fonts, theme + toast providers
+  page.tsx          # Home page assembling all sections
+  globals.css       # Tailwind base and global styles
+components/
+  Navbar.tsx, Hero.tsx, NoticeBoard.tsx, Facilities.tsx, AboutUsGrid.tsx
+  Team.tsx, Gallery.tsx, Contact.tsx, Footer.tsx
+  ThemeProvider.tsx, ToastProvider.tsx, ScrollReveal.tsx
+  assets/           # Local images (gallery, council photos, hero backgrounds)
+tailwind.config.ts  # Design tokens (colors, fonts)
+next.config.js      # Next.js configuration
 ```
 
-## 🎨 Customization
+## Getting Started
 
-### Changing the Primary Color
+Prerequisites: Node.js 18+ and npm.
 
-Edit `tailwind.config.ts` to change the primary brand color:
+1. Install dependencies  
+   `npm install`
 
-```typescript
-colors: {
-  primary: {
-    DEFAULT: '#1e40af', // Change this to your desired color
-    dark: '#1e3a8a',
-    light: '#3b82f6',
-  },
-}
-```
+2. Run the dev server  
+   `npm run dev`  
+   Visit http://localhost:3000
 
-### Adding Content
+3. Production build  
+   `npm run build`  
+   `npm run start`
 
-- **Team Members:** Edit the `teamMembers` array in `components/Team.tsx`
-- **Facilities:** Edit the `facilities` array in `components/Facilities.tsx`
-- **Gallery Images:** Edit the `galleryImages` array in `components/Gallery.tsx`
-- **Announcements:** Edit the `announcements` array in `components/NoticeBoard.tsx`
+## Available Scripts
 
-## 🎯 Key Features Implemented
+- `npm run dev` – start Next.js in development
+- `npm run build` – create production build
+- `npm run start` – run the production server
+- `npm run lint` – lint the project with Next.js ESLint config
 
-### Core Requirements ✅
-- [x] Sticky Navbar with responsive hamburger menu
-- [x] Hero section with animated text and CTAs
-- [x] About Us section with split-screen layout
-- [x] Facilities grid with icons and hover effects
-- [x] Team section with profile cards
-- [x] Gallery with masonry grid and lightbox
-- [x] Contact section with form and map
+## Customization Tips
 
-### Brownie Points ✅
-- [x] Notice Board with auto-rotating announcements
-- [x] Framer Motion animations throughout
-- [x] Parallax effect on Hero section
-- [x] Staggered fade-in effects on scroll
-- [x] Dark/Light mode toggle
-- [x] Smooth page transitions
+- Update brand colors and fonts in `tailwind.config.ts` (`primary` palette, `fontFamily`)
+- Swap hero/background/gallery assets in `components/assets/`
+- Edit section data in corresponding components (e.g., facilities grid, team list, notices)
 
-## 📱 Responsive Breakpoints
+## Deployment
 
-- **Mobile:** < 640px
-- **Tablet:** 640px - 1024px
-- **Desktop:** > 1024px
-
-## 🚀 Build for Production
-
-```bash
-npm run build
-npm start
-```
-
-## 📝 Notes
-
-- All images are placeholders - replace with actual images
-- Google Maps embed uses a placeholder - update with your actual location
-- Contact form is visual only - integrate with your backend API
-- Theme preference is saved in localStorage
-
-## 🎨 Design System
-
-- **Primary Font:** Inter (Sans-serif)
-- **Heading Font:** Poppins (Serif)
-- **Color Scheme:** Royal Blue (easily customizable)
-- **Spacing:** Consistent 4px grid system
-- **Border Radius:** 8px (lg), 12px (xl), 16px (2xl)
-
-## 📄 License
-
-Built for Web Brawl General Championship
-
----
-
-**Happy Coding! 🎉**
-
+Build with `npm run build` and deploy the `.next` output to any Next.js-compatible host (Vercel recommended). Ensure environment matches Node 18+.

@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { 
   UtensilsCrossed, 
   Wrench, 
@@ -11,6 +10,7 @@ import {
   Tv,
   Shield
 } from 'lucide-react'
+import ScrollReveal from './ScrollReveal'
 
 
 const facilities = [
@@ -69,30 +69,22 @@ export default function Facilities() {
     <section id="facilities" className="py-20 bg-yellow-100 dark:bg-yellow-600 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <ScrollReveal className="text-center mb-16">
           <h2 className="font-serif font-bold text-4xl md:text-5xl text-gray-900 dark:text-white mb-4">
             Our Facilities
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-4" />
-        </motion.div>
+        </ScrollReveal>
 
         {/* Facilities Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {facilities.map((facility, index) => {
             const Icon = facility.icon
             return (
-              <motion.div
+              <ScrollReveal
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.01, delay: 0.1 }}
+                duration={0.01}
+                delay={index * 0.05}
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="group relative bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
               >
@@ -114,7 +106,7 @@ export default function Facilities() {
 
                 {/* Glow Effect */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${facility.color} opacity-0 group-hover:opacity-5 blur-xl transition-opacity duration-300 -z-10`} />
-              </motion.div>
+              </ScrollReveal>
             )
           })}
         </div>

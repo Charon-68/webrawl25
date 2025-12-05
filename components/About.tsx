@@ -1,8 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { Award, Users, Calendar } from 'lucide-react'
 import Image from 'next/image'
+import ScrollReveal from './ScrollReveal'
 
 import aboutus1 from './assets/aboutus1.jpg'
 import aboutus2 from './assets/aboutus2.jpg'
@@ -45,28 +45,16 @@ export default function About() {
     <section id="about" className="py-20 bg-yellow-100 dark:bg-yellow-600 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <ScrollReveal className="text-center mb-16">
           <h2 className="font-serif font-bold text-4xl md:text-5xl text-gray-900 dark:text-white mb-4">
             About Us
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto" />
-        </motion.div>
+        </ScrollReveal>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
+          <ScrollReveal className="space-y-6">
             <div>
               <h3 className="font-serif font-bold text-3xl text-gray-900 dark:text-white mb-4">
                 Our History
@@ -96,12 +84,12 @@ export default function About() {
               {achievements.map((achievement, index) => {
                 const Icon = achievement.icon
                 return (
-                  <motion.div
+                  <ScrollReveal
                     key={index}
+                    duration={0.5}
+                    delay={index * 0.1}
                     initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     whileHover={{ scale: 1.05 }}
                     className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
                   >
@@ -112,27 +100,21 @@ export default function About() {
                     <p className="text-xs text-gray-600 dark:text-gray-400">
                       {achievement.year}
                     </p>
-                  </motion.div>
+                  </ScrollReveal>
                 )
               })}
             </div>
-          </motion.div>
+          </ScrollReveal>
 
           {/* Image Grid */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 gap-4"
-          >
+          <ScrollReveal className="grid grid-cols-2 gap-4">
             {hostelImages.map((image, index) => (
-              <motion.div
+              <ScrollReveal
                 key={image.id}
+                duration={0.5}
+                delay={index * 0.1}
                 initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.05 }}
                 className="relative aspect-square rounded-lg overflow-hidden shadow-lg group"
               >
@@ -147,9 +129,9 @@ export default function About() {
                 
                 {/* Subtle Overlay on Hover */}
                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.div>
+              </ScrollReveal>
             ))}
-          </motion.div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
