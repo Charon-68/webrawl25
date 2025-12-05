@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Play } from 'lucide-react'
 import { useRef, useEffect } from 'react'
+import Image from 'next/image'
+
+import h2bg from './assets/h2bg.jpg'
 
 export default function Hero() {
   const videoRef = useRef<HTMLDivElement>(null)
@@ -34,15 +37,13 @@ export default function Hero() {
         ref={videoRef}
         className="absolute inset-0 z-0"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-dark to-primary-light opacity-90 dark:opacity-80">
-          {/* Placeholder for Hero Video/Image */}
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="text-white/20 text-9xl font-serif font-bold">
-              HOSTEL
-            </div>
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+        <Image
+          src={h2bg}
+          alt="Hostel Background"
+          className="w-full h-full object-cover"
+        />
+        
+        <div className="absolute inset-0 bg-black/50 dark:bg-black/60" />
       </div>
 
       {/* Content */}
@@ -60,13 +61,13 @@ export default function Hero() {
           >
             Welcome to{' '}
             <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="inline-block text-primary-light"
-            >
-              Our Hostel
-            </motion.span>
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="inline-block text-yellow-400"
+          >
+            The Wild Ones
+          </motion.span>
           </motion.h1>
 
           <motion.p
@@ -95,40 +96,9 @@ export default function Hero() {
               <span>Explore Facilities</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection('#contact')}
-              className="group px-8 py-4 bg-primary-light text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
-            >
-              <Play className="w-5 h-5" />
-              <span>Contact Warden</span>
-            </motion.button>
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="w-1.5 h-1.5 bg-white rounded-full mt-2"
-          />
-        </motion.div>
-      </motion.div>
     </section>
   )
 }
-

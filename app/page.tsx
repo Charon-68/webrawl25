@@ -18,7 +18,6 @@ export default function Home() {
       <Facilities />
       <Team />
       <Gallery />
-      <Contact />
       <Footer />
     </main>
   )

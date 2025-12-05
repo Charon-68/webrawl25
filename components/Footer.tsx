@@ -7,18 +7,17 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    { icon: Facebook, href: 'https://www.facebook.com/h2iitb', label: 'Facebook' },
+    { icon: Instagram, href: 'https://www.instagram.com/the_wild_ones_h2/', label: 'Instagram' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/hostel2iitbombay/', label: 'LinkedIn' },
   ]
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="py-20 bg-yellow-100 dark:bg-yellow-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -33,10 +32,10 @@ export default function Footer() {
             <p className="text-gray-400 text-sm">
               A home away from home, where memories are made and friendships flourish.
             </p>
-          </motion.div>
+          </motion.div> */}
 
           {/* Quick Links */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -55,34 +54,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
-
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h3 className="font-serif font-bold text-lg mb-4">Contact</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start space-x-3">
-                <Mail className="w-5 h-5 text-primary-light flex-shrink-0 mt-0.5" />
-                <span className="text-gray-400 text-sm">contact@hostel.edu</span>
-              </li>
-              <li className="flex items-start space-x-3">
-                <Phone className="w-5 h-5 text-primary-light flex-shrink-0 mt-0.5" />
-                <span className="text-gray-400 text-sm">+1 234 567 8900</span>
-              </li>
-              <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-primary-light flex-shrink-0 mt-0.5" />
-                <span className="text-gray-400 text-sm">
-                  123 University Avenue<br />
-                  Campus Area, City 12345
-                </span>
-              </li>
-            </ul>
-          </motion.div>
+          </motion.div> */}
 
           {/* Social Media */}
           <motion.div
@@ -99,6 +71,7 @@ export default function Footer() {
                   <motion.a
                     key={index}
                     href={social.href}
+                    target='_blank'
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.9 }}
                     className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-primary-light hover:bg-gray-700 transition-colors"
@@ -112,12 +85,6 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400 text-sm">
-            © {currentYear} Hostel. All rights reserved. | Built for Web Brawl General Championship
-          </p>
-        </div>
       </div>
     </footer>
   )

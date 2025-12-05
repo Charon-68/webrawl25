@@ -3,26 +3,27 @@
 import { motion } from 'framer-motion'
 import { 
   UtensilsCrossed, 
-  Dumbbell, 
+  Wrench, 
   Wifi, 
   BookOpen, 
-  Car, 
+  Bike, 
   Droplets,
   Tv,
   Shield
 } from 'lucide-react'
 
+
 const facilities = [
   {
     icon: UtensilsCrossed,
-    title: 'Mess & Dining',
-    description: 'Well-equipped mess serving nutritious and delicious meals three times a day.',
+    title: 'Mess',
+    description: 'Well-equipped mess serving nutritious and delicious meals four times a day.',
     color: 'from-orange-500 to-red-500',
   },
   {
-    icon: Dumbbell,
-    title: 'Gym & Fitness',
-    description: 'Modern gymnasium with state-of-the-art equipment for your fitness journey.',
+    icon: Wrench,
+    title: 'Tech Room',
+    description: 'Modern tech room with state-of-the-art equipment for your tech journey.',
     color: 'from-purple-500 to-pink-500',
   },
   {
@@ -33,14 +34,14 @@ const facilities = [
   },
   {
     icon: BookOpen,
-    title: 'Library & Study Hall',
-    description: 'Quiet study spaces and a well-stocked library for academic excellence.',
+    title: 'Study Room',
+    description: 'Quiet study space for academic excellence.',
     color: 'from-green-500 to-emerald-500',
   },
   {
-    icon: Car,
-    title: 'Parking Facility',
-    description: 'Secure parking space for two-wheelers and bicycles of residents.',
+    icon: Bike,
+    title: 'Cycle Parking',
+    description: 'Secure parking space for bicycles of residents.',
     color: 'from-gray-500 to-slate-500',
   },
   {
@@ -51,8 +52,8 @@ const facilities = [
   },
   {
     icon: Tv,
-    title: 'Recreation Room',
-    description: 'Common room with TV, games, and entertainment facilities for relaxation.',
+    title: 'Common Room',
+    description: 'Common room with TV and entertainment facilities for relaxation.',
     color: 'from-indigo-500 to-purple-500',
   },
   {
@@ -65,7 +66,7 @@ const facilities = [
 
 export default function Facilities() {
   return (
-    <section id="facilities" className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="facilities" className="py-20 bg-yellow-100 dark:bg-yellow-600 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -94,7 +95,7 @@ export default function Facilities() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.01, delay: 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="group relative bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
               >

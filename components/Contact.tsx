@@ -61,7 +61,7 @@ export default function Contact() {
                 Get in Touch
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-8">
-                We're here to help! Reach out to us through any of the following channels.
+                Were here to help! Reach out to us through any of the following channels.
               </p>
             </div>
 

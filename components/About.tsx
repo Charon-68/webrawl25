@@ -2,23 +2,47 @@
 
 import { motion } from 'framer-motion'
 import { Award, Users, Calendar } from 'lucide-react'
+import Image from 'next/image'
+
+import aboutus1 from './assets/aboutus1.jpg'
+import aboutus2 from './assets/aboutus2.jpg'
+import aboutus3 from './assets/aboutus3.jpg'
+import aboutus4 from './assets/aboutus4.jpg'
+
 
 const achievements = [
-  { icon: Award, title: 'Best Hostel Award', year: '2023' },
+  { icon: Award, title: 'GC Winners', year: '2024' },
   { icon: Users, title: '500+ Residents', year: 'Active' },
   { icon: Calendar, title: 'Established', year: '1985' },
 ]
 
-const imagePlaceholders = [
-  { id: 1, alt: 'Hostel Building' },
-  { id: 2, alt: 'Common Area' },
-  { id: 3, alt: 'Dining Hall' },
-  { id: 4, alt: 'Recreation Room' },
+// Updated array with real Unsplash URLs
+const hostelImages = [
+  { 
+    id: 1, 
+    alt: 'image1', 
+    src: aboutus1
+  },
+  { 
+    id: 2, 
+    alt: 'image2', 
+    src: aboutus2
+  },
+  { 
+    id: 3, 
+    alt: 'image3', 
+    src: aboutus3
+  },
+  { 
+    id: 4, 
+    alt: 'image4', 
+    src: aboutus4
+  },
 ]
 
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-white dark:bg-gray-900">
+    <section id="about" className="py-20 bg-yellow-100 dark:bg-yellow-600 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -102,7 +126,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="grid grid-cols-2 gap-4"
           >
-            {imagePlaceholders.map((image, index) => (
+            {hostelImages.map((image, index) => (
               <motion.div
                 key={image.id}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -110,12 +134,19 @@ export default function About() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
-                className="relative aspect-square rounded-lg overflow-hidden bg-gradient-to-br from-primary to-primary-dark shadow-lg"
+                className="relative aspect-square rounded-lg overflow-hidden shadow-lg group"
               >
-                <div className="absolute inset-0 flex items-center justify-center text-white/20 text-2xl font-serif">
-                  {image.alt}
-                </div>
-                <div className="absolute inset-0 bg-black/10 hover:bg-black/20 transition-colors" />
+                {/* Next.js Image Component */}
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                
+                {/* Subtle Overlay on Hover */}
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.div>
             ))}
           </motion.div>
@@ -124,4 +155,3 @@ export default function About() {
     </section>
   )
 }
-
