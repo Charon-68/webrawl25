@@ -92,9 +92,26 @@ const departmentSecys = {
   ],
 }
 
+// --- Types ---
+interface TeamMember {
+  id?: string;
+  name: string;
+  role: string;
+  image: any;
+  email: string;
+  phone?: string;
+  description?: string;
+}
+
+interface MemberCardProps {
+  member: TeamMember;
+  isLeader?: boolean;
+  onOpenSecys: (member: TeamMember) => void;
+}
+
 // --- Components ---
 
-const MemberCard = ({ member, isLeader = false, onOpenSecys }) => {
+const MemberCard = ({ member, isLeader = false, onOpenSecys }: MemberCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -141,7 +158,7 @@ const MemberCard = ({ member, isLeader = false, onOpenSecys }) => {
         </div>
 
         {/* Button (Only for Cos/Nominees who have secys) */}
-        {departmentSecys[member.id] && (
+        {member.id && departmentSecys[member.id as keyof typeof departmentSecys] && (
           <button
             onClick={() => onOpenSecys(member)}
             className="mt-auto w-full group flex items-center justify-center gap-2 text-sm font-bold text-primary hover:text-white px-4 py-3 rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary transition-all"
@@ -156,7 +173,14 @@ const MemberCard = ({ member, isLeader = false, onOpenSecys }) => {
   );
 };
 
-const SecretaryModal = ({ isOpen, onClose, data, departmentName }) => {
+interface SecretaryModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  data: TeamMember[] | null;
+  departmentName: string;
+}
+
+const SecretaryModal = ({ isOpen, onClose, data, departmentName }: SecretaryModalProps) => {
   if (!isOpen || !data) return null;
 
   return (
@@ -236,9 +260,9 @@ const SecretaryModal = ({ isOpen, onClose, data, departmentName }) => {
 
 export default function Team() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedDept, setSelectedDept] = useState(null);
+  const [selectedDept, setSelectedDept] = useState<TeamMember | null>(null);
 
-  const handleOpenSecys = (member) => {
+  const handleOpenSecys = (member: TeamMember) => {
     setSelectedDept(member);
     setModalOpen(true);
   };
@@ -281,7 +305,7 @@ export default function Team() {
         </div>
 
         {/* --- Layout: Level 3 (Second 3 Cos) --- */}
-        <div className="flex flex-wrap ustify-center gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {rowTwoCos.map((member) => (
             <MemberCard key={member.id} member={member} onOpenSecys={handleOpenSecys} />
           ))}
@@ -292,14 +316,14 @@ export default function Team() {
       <SecretaryModal
         isOpen={modalOpen}
         onClose={closeSecys}
-        data={selectedDept ? departmentSecys[selectedDept.id] : []}
+        data={selectedDept && selectedDept.id ? departmentSecys[selectedDept.id as keyof typeof departmentSecys] : null}
         departmentName={selectedDept ? selectedDept.role : ''}
       />
       
       {/* Centered Button Container */}
       <div className="w-full flex justify-center mt-16 pb-10">
         <button
-          onClick={() => handleOpenSecys({ id: 'alumni', role: 'Alumni Secretary' })}
+          onClick={() => handleOpenSecys({ id: 'alumni', role: 'Alumni Secretary', name: 'Alumni', image: avichal, email: 'alumni@hostel.edu' })}
           className="group flex items-center justify-center gap-2 text-xl font-bold text-white px-8 py-4 rounded-xl bg-gray-900 hover:bg-gray-800 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
         >
           Other Secys
