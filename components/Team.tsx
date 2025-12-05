@@ -271,9 +271,6 @@ export default function Team() {
             Meet Our Council
           </h2>
           <div className="w-24 h-1.5 bg-amber-600 mx-auto rounded-full mb-6" />
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
-            The dedicated students working behind the scenes to make the hostel a home.
-          </p>
         </motion.div>
 
         {/* --- Layout: Level 1 (Leaders) --- */}

@@ -52,7 +52,7 @@ const facilities = [
   },
   {
     icon: Tv,
-    title: 'Common Room',
+    title: 'Lounge & TV Room',
     description: 'Common room with TV and entertainment facilities for relaxation.',
     color: 'from-indigo-500 to-purple-500',
   },
@@ -80,9 +80,6 @@ export default function Facilities() {
             Our Facilities
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-4" />
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            We provide world-class amenities to ensure your comfort and convenience
-          </p>
         </motion.div>
 
         {/* Facilities Grid */}

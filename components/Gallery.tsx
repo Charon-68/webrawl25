@@ -116,9 +116,6 @@ export default function Gallery() {
             Gallery
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-4" />
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Take a virtual tour of our facilities and spaces
-          </p>
         </motion.div>
 
         {/* Carousel Container */}
