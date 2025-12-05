@@ -31,6 +31,7 @@ import aryan from './assets/councilPhotos/aryan.png';
 import priyanshu from './assets/councilPhotos/priyanshu.png';
 import jay from './assets/councilPhotos/jay.png';
 import aman from './assets/councilPhotos/aman.png';
+import soham from './assets/councilPhotos/soham.jpg';
 
 
 // --- Data Configuration ---
@@ -67,7 +68,7 @@ const departmentSecys = {
     { name: 'Anmol Gill', role: 'Cult Secy', image: prithvi, email: 'prithvi@cult.hostel' },
   ],
   tech: [
-    { name: 'Soham sahoo', role: 'Tech Secy', image: saumya, email: 'saumya@tech.hostel' },
+    { name: 'Soham sahoo', role: 'Tech Secy', image: soham, email: 'saumya@tech.hostel' },
     { name: 'Garvit meena', role: 'Tech Secy', image: garvit, email: 'shlok@tech.hostel' },
   ],
   maint: [

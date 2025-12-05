@@ -52,8 +52,8 @@ const facilities = [
   },
   {
     icon: Tv,
-    title: 'Common Room',
-    description: 'Common room with TV and entertainment facilities for relaxation.',
+    title: 'Lounge & TV room',
+    description: 'Lounge room with TV and entertainment facilities for relaxation.',
     color: 'from-indigo-500 to-purple-500',
   },
   {
