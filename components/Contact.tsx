@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, Facebook, Instagram, Linkedin } from 'lucide-react'
+import { Send, Facebook, Instagram, Linkedin } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import Confetti from 'react-confetti'
 import toast from 'react-hot-toast'
@@ -129,53 +129,8 @@ export default function Contact() {
               </p>
             </div>
 
-            {/* Contact Cards */}
+            {/* Social Media Handles */}
             <div className="space-y-4">
-              <motion.a
-                href="mailto:contact@hostel.edu"
-                whileHover={{ scale: 1.02, x: 5 }}
-                className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              >
-                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Email</h4>
-                  <p className="text-gray-600 dark:text-gray-400">contact@hostel.edu</p>
-                </div>
-              </motion.a>
-
-              <motion.a
-                href="tel:+12345678900"
-                whileHover={{ scale: 1.02, x: 5 }}
-                className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              >
-                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Phone</h4>
-                  <p className="text-gray-600 dark:text-gray-400">+1 234 567 8900</p>
-                </div>
-              </motion.a>
-
-              <motion.div
-                whileHover={{ scale: 1.02, x: 5 }}
-                className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg"
-              >
-                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Address</h4>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    123 University Avenue<br />
-                    Campus Area, City 12345
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* Social Media Handles */}
               <motion.a
                 href="https://www.facebook.com/h2iitb"
                 target="_blank"
@@ -225,17 +180,17 @@ export default function Contact() {
               </motion.a>
             </div>
 
-            {/* Map Placeholder */}
+            {/* Map */}
             <div className="mt-8 rounded-lg overflow-hidden shadow-lg">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.184132576858!2d-73.98811768459399!3d40.75889597932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5312.218722673809!2d72.9119282110516!3d19.13629015794443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b80705fb82d1%3A0x2b6b5441a804bae4!2sH2%20Canteen!5e0!3m2!1sen!2sin!4v1764921071393!5m2!1sen!2sin"
                 width="100%"
-                height="300"
+                height="450"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-64"
+                className="w-full"
               />
             </div>
           </motion.div>
