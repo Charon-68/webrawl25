@@ -86,7 +86,10 @@ export default function About() {
                 return (
                   <ScrollReveal
                     key={index}
+                    duration={0.5}
                     delay={index * 0.1}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     whileHover={{ scale: 1.05 }}
                     className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
                   >
@@ -108,7 +111,10 @@ export default function About() {
             {hostelImages.map((image, index) => (
               <ScrollReveal
                 key={image.id}
+                duration={0.5}
                 delay={index * 0.1}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.05 }}
                 className="relative aspect-square rounded-lg overflow-hidden shadow-lg group"
               >

@@ -8,6 +8,8 @@ type ScrollRevealProps = PropsWithChildren<
 > & {
   delay?: number
   duration?: number
+  initial?: { opacity?: number; y?: number; x?: number; scale?: number }
+  animate?: { opacity?: number; y?: number; x?: number; scale?: number }
 }
 
 export default function ScrollReveal({
@@ -15,16 +17,24 @@ export default function ScrollReveal({
   delay = 0,
   duration = 0.6,
   className,
+  initial,
+  animate,
   ...motionProps
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement | null>(null)
   const isInView = useInView(ref, { once: true })
 
+  const defaultInitial = { opacity: 0, y: 20 }
+  const defaultAnimate = { opacity: 1, y: 0 }
+
+  const finalInitial = initial || defaultInitial
+  const finalAnimate = animate || defaultAnimate
+
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      initial={finalInitial}
+      animate={isInView ? finalAnimate : finalInitial}
       transition={{ duration, delay, ease: 'easeOut' }}
       className={className}
       {...motionProps}

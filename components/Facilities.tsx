@@ -86,6 +86,7 @@ export default function Facilities() {
             return (
               <ScrollReveal
                 key={index}
+                duration={0.01}
                 delay={index * 0.05}
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="group relative bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
